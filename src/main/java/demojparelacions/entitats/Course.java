@@ -1,9 +1,13 @@
 package demojparelacions.entitats;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,7 +26,7 @@ public class Course {
 	private long id;
 	private String title;
 	
-	@OneToOne(mappedBy = "course")
+	@OneToMany(mappedBy = "course")
 	@JsonIgnore
-	private CourseMaterial courseMaterial;
+	private List<CourseMaterial> courseMaterial;
 }

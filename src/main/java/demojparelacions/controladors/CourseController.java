@@ -1,6 +1,7 @@
 package demojparelacions.controladors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,10 @@ public class CourseController {
 	@GetMapping("course/{id}")
 	public Course getCourse(@PathVariable long id) {
 		Course course = courseRep.findById(id).get();
+		if (course==null) {
+			return null;
+		}
+		System.out.println("EAGER OR LAZY");
 		return course;
 	}
 	
@@ -44,4 +49,10 @@ public class CourseController {
 		CourseMaterial coursemat = coursematRep.findById(id).get();
 		return coursemat;
 	}
+	
+	@DeleteMapping("course/delete/{id}")
+	public void deleteCourse (@PathVariable long id) {
+		courseRep.deleteById(id);
+	}
+	
 }
